@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>REGISTRATION FORM</title>
+       <style>
+    body {
+        background-color: #f5f7fa;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    h2 {
+        color: #40566f;
+        text-align: center;
+    }
+
+    form {
+        background-color: #ffffff;
+        width: 600px;
+        margin: 30px auto;
+        padding: 25px;
+        border: 1px solid #d9e2ec;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    label {
+        color: #34495e;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 7px;
+        margin: 5px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        background-color: #f8fafc;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #9bb7d4;
+        background-color: #ffffff;
+    }
+
+    input[type="submit"] {
+        background-color: #8faec7;
+        color: white;
+        padding: 9px 22px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    input[type="reset"] {
+        background-color: #b8c5d1;
+        color: white;
+        padding: 9px 22px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #7899b5;
+    }
+
+    input[type="reset"]:hover {
+        background-color: #9eacb8;
+    }
+</style>
+    </head>
+    <body>
+        <h2 align="center">EMPLOYEE REGISTRATION FORM</h2>
+        <form>
+            <label>FULL NAME:</label>
+            <input type="text" placeholder="Enter Your Full Name" required>
+            <br><br>
+            <label>USER NAME:</label>
+            <input type="text" placeholder="Enter Username" required>
+            <br><br>
+            <label>EMAIL:</label>
+            <input type="email" placeholder="Enter your email " required>
+            <br><br>
+            <label>PASSWORD:</label>
+            <input type="password" name="password" required>
+            <br><br>
+            <label>CONFIRM PASSWORD:</label>
+            <input type="password" name="confirm password" required>
+            <br><br>
+            <label>PHONE NUMBER:</label>
+            <input type="tel" name="phone">
+            <br><br>
+            <label>DATE OF BIRTH:</label>
+            <input type="date" name="date of birth">
+            <br><br>
+            <label>GENDER:</label>
+            <input type="radio" name="gender" value="male">male
+            <input type="radio" name="gender" value="female">female
+            <br><br>
+            <label>ADDRESS:</label>
+            <textarea name="address" rows="4" cols="30"></textarea>
+            <br><br>
+            <label>CITY:</label>
+            <input type="text" name="city">
+            <br><br>
+            <label>STATE:</label>
+            <select name="state">
+    <option value="">-- Select State --</option>
+
+    <!-- States -->
+        <option>Andhra Pradesh</option>
+        <option>Arunachal Pradesh</option>
+        <option>Assam</option>
+        <option>Bihar</option>
+        <option>Chhattisgarh</option>
+        <option>Goa</option>
+    <option>Gujarat</option>
+    <option>Haryana</option>
+    <option>Himachal Pradesh</option>
+    <option>Jharkhand</option>
+    <option>Karnataka</option>
+    <option>Kerala</option>
+    <option>Madhya Pradesh</option>
+    <option>Maharashtra</option>
+    <option>Manipur</option>
+    <option>Meghalaya</option>
+    <option>Mizoram</option>
+    <option>Nagaland</option>
+    <option>Odisha</option>
+    <option>Punjab</option>
+    <option>Rajasthan</option>
+    <option>Sikkim</option>
+    <option>Tamil Nadu</option>
+    <option>Telangana</option>
+    <option>Tripura</option>
+    <option>Uttar Pradesh</option>
+    <option>Uttarakhand</option>
+    <option>West Bengal</option>
+            </select>
+    <br><br>
+    <label>COUNTRY:</label>
+    <select name="country">
+    <option value="">-- Select Country --</option>
+
+    <option>India</option>
+    <option>United States</option>
+    <option>United Kingdom</option>
+    <option>Canada</option>
+    <option>Australia</option>
+    <option>Germany</option>
+    <option>France</option>
+    <option>Japan</option>
+    <option>China</option>
+    <option>Singapore</option>
+    <option>United Arab Emirates</option>
+    <option>Saudi Arabia</option>
+    <option>South Korea</option>
+    <option>New Zealand</option>
+    <option>Italy</option>
+    <option>Russia</option>
+    <option>Brazil</option>
+    <option>South Africa</option>
+    <option>Malaysia</option>
+    <option>Thailand</option>
+    <option>Bangladesh</option>
+</select>
+<br><br>
+<label>PINCODE:</label>
+<input type="number" name="pincode">
+<br><br>
+<label>UPLOAD PROFILE:</label>
+<input type="file" name="profile_photo">
+<br><br>
+<label>HOBBIES:</label>
+<input type="checkbox" name="hobby" value="problem solving">problem solving
+<input type="checkbox" name="hobby" value="reading">reading
+<input type="checkbox" name="hobby" value="coding">coding
+<input type="checkbox" name="hobby" value="learning new skills">learning new skills
+<input type="checkbox" name="hobby" value="playing sports">playing sports
+<input type="checkbox" name="hobby" value="listening to music">listening to music
+<input type="checkbox" name="hobby" value="photography">photography
+<input type="checkbox" name="hobby" value="drawing">drawing
+<input type="checkbox" name="hobby" value="creative writing">creative writing
+<br><br>
+<label>TERMS & CONDITIONS:</label>
+<input type="checkbox" name="terms">I agree to the Terms and Conditions
+<br><br>
+<input type="submit" name="register">
+<input type="reset" name="reset">
+
+        </form
+    </body>
+</html>
