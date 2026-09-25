@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Medicine - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        MediCare Hospital
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/patients">
+            Patients
+        </a>
+
+        <a href="/doctors">
+            Doctors
+        </a>
+
+        <a href="/appointments">
+            Appointments
+        </a>
+
+        <a href="/pharmacy" class="active">
+            Pharmacy
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= EDIT MEDICINE ================= -->
+
+<main class="pharmacy-form-page">
+
+    <div class="pharmacy-form-card">
+
+        <h1>
+            Edit Medicine
+        </h1>
+
+        <p>
+            Update medicine and stock information.
+        </p>
+
+
+        <form method="POST">
+
+
+            <div class="pharmacy-form-grid">
+
+
+                <!-- MEDICINE NAME -->
+
+                <div class="pharmacy-form-group">
+
+                    <label for="name">
+                        Medicine Name
+                    </label>
+
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           value="{{ medicine['name'] }}"
+                           placeholder="Enter medicine name"
+                           required>
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="pharmacy-form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select id="category"
+                            name="category"
+                            required>
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Tablet"
+                            {% if medicine['category'] == 'Tablet' %}selected{% endif %}>
+                            Tablet
+                        </option>
+
+                        <option value="Capsule"
+                            {% if medicine['category'] == 'Capsule' %}selected{% endif %}>
+                            Capsule
+                        </option>
+
+                        <option value="Syrup"
+                            {% if medicine['category'] == 'Syrup' %}selected{% endif %}>
+                            Syrup
+                        </option>
+
+                        <option value="Injection"
+                            {% if medicine['category'] == 'Injection' %}selected{% endif %}>
+                            Injection
+                        </option>
+
+                        <option value="Cream"
+                            {% if medicine['category'] == 'Cream' %}selected{% endif %}>
+                            Cream
+                        </option>
+
+                        <option value="Ointment"
+                            {% if medicine['category'] == 'Ointment' %}selected{% endif %}>
+                            Ointment
+                        </option>
+
+                        <option value="Drops"
+                            {% if medicine['category'] == 'Drops' %}selected{% endif %}>
+                            Drops
+                        </option>
+
+                        <option value="Other"
+                            {% if medicine['category'] == 'Other' %}selected{% endif %}>
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- MANUFACTURER -->
+
+                <div class="pharmacy-form-group">
+
+                    <label for="manufacturer">
+                        Manufacturer
+                    </label>
+
+                    <input type="text"
+                           id="manufacturer"
+                           name="manufacturer"
+                           value="{{ medicine['manufacturer'] or '' }}"
+                           placeholder="Enter manufacturer name">
+
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="pharmacy-form-group">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+                    <input type="number"
+                           id="quantity"
+                           name="quantity"
+                           value="{{ medicine['quantity'] }}"
+                           min="0"
+                           placeholder="Enter quantity"
+                           required>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="pharmacy-form-group">
+
+                    <label for="price">
+                        Price
+                    </label>
+
+                    <input type="number"
+                           id="price"
+                           name="price"
+                           value="{{ medicine['price'] }}"
+                           min="0"
+                           step="0.01"
+                           placeholder="Enter price"
+                           required>
+
+                </div>
+
+
+                <!-- EXPIRY DATE -->
+
+                <div class="pharmacy-form-group">
+
+                    <label for="expiry_date">
+                        Expiry Date
+                    </label>
+
+                    <input type="date"
+                           id="expiry_date"
+                           name="expiry_date"
+                           value="{{ medicine['expiry_date'] }}"
+                           required>
+
+                </div>
+
+
+                <!-- SUPPLIER -->
+
+                <div class="pharmacy-form-group pharmacy-full-width">
+
+                    <label for="supplier">
+                        Supplier
+                    </label>
+
+                    <input type="text"
+                           id="supplier"
+                           name="supplier"
+                           value="{{ medicine['supplier'] or '' }}"
+                           placeholder="Enter supplier name">
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="pharmacy-form-buttons">
+
+                <button type="submit"
+                        class="pharmacy-save-btn">
+
+                    Update Medicine
+
+                </button>
+
+
+                <a href="/pharmacy"
+                   class="pharmacy-cancel-btn">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>
