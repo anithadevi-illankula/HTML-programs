@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <h2>🏥 MediCare Hospital</h2>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/doctors" class="active">
+            Doctors
+        </a>
+
+        <a href="/add-doctor">
+            Add Doctor
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+    <!-- ==========================================
+         DOCTOR MANAGEMENT
+         ========================================== -->
+
+    <main class="doctor-page">
+
+
+        <div class="doctor-header">
+
+            <div>
+
+                <h1>
+                    Doctor Management
+                </h1>
+
+                <p>
+                    View and manage hospital doctors and their details.
+                </p>
+
+            </div>
+
+
+            <a href="/add-doctor"
+               class="doctor-add-btn">
+
+                + Add Doctor
+
+            </a>
+
+        </div>
+
+
+        <!-- ======================================
+             DOCTOR TABLE
+             ====================================== -->
+
+        {% if doctors %}
+
+        <div class="doctor-table-container">
+
+            <table class="doctor-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Doctor Name
+                        </th>
+
+                        <th>
+                            Specialization
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Phone
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Experience
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for doctor in doctors %}
+
+                    <tr>
+
+                        <td>
+                            {{ doctor['id'] }}
+                        </td>
+
+
+                        <td class="doctor-name">
+
+                            👨‍⚕️
+                            {{ doctor['fullname'] }}
+
+                        </td>
+
+
+                        <td class="doctor-specialization">
+
+                            {{ doctor['specialization'] }}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="department-badge">
+
+                                {{ doctor['department'] }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            {{ doctor['phone'] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ doctor['email'] or 'Not Provided' }}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="experience-badge">
+
+                                {{ doctor['experience'] }} Years
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="doctor-actions">
+
+
+                                <a href="/edit-doctor/{{ doctor['id'] }}"
+                                   class="doctor-edit-btn">
+
+                                    Edit
+
+                                </a>
+
+
+                                <a href="/delete-doctor/{{ doctor['id'] }}"
+                                   class="doctor-delete-btn"
+                                   onclick="return confirm('Are you sure you want to delete this doctor?');">
+
+                                    Delete
+
+                                </a>
+
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- ======================================
+             EMPTY STATE
+             ====================================== -->
+
+        <div class="doctor-table-container">
+
+            <div class="no-doctors">
+
+                <div class="no-doctors-icon">
+                    👨‍⚕️
+                </div>
+
+                <h3>
+                    No Doctors Found
+                </h3>
+
+                <p>
+                    There are currently no doctors registered
+                    in the hospital system.
+                </p>
+
+                <a href="/add-doctor"
+                   class="doctor-add-btn">
+
+                    + Add First Doctor
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </main>
+
+
+</body>
+
+</html>
