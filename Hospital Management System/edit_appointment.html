@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Appointment - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        MediCare Hospital
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/patients">
+            Patients
+        </a>
+
+        <a href="/doctors">
+            Doctors
+        </a>
+
+        <a href="/appointments" class="active">
+            Appointments
+        </a>
+
+        <a href="#">
+            Pharmacy
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= EDIT APPOINTMENT ================= -->
+
+<main class="appointment-form-page">
+
+    <div class="appointment-form-card">
+
+
+        <h1>
+            Edit Appointment
+        </h1>
+
+
+        <p>
+            Update the patient appointment details.
+        </p>
+
+
+        <form method="POST">
+
+
+            <div class="appointment-form-grid">
+
+
+                <!-- PATIENT -->
+
+                <div class="appointment-form-group">
+
+                    <label for="patient_id">
+                        Select Patient
+                    </label>
+
+                    <select id="patient_id"
+                            name="patient_id"
+                            required>
+
+                        <option value="">
+                            Select Patient
+                        </option>
+
+
+                        {% for patient in patients %}
+
+                        <option value="{{ patient['id'] }}"
+                            {% if patient['id'] == appointment['patient_id'] %}
+                                selected
+                            {% endif %}>
+
+                            {{ patient['fullname'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DOCTOR -->
+
+                <div class="appointment-form-group">
+
+                    <label for="doctor_id">
+                        Select Doctor
+                    </label>
+
+                    <select id="doctor_id"
+                            name="doctor_id"
+                            required>
+
+                        <option value="">
+                            Select Doctor
+                        </option>
+
+
+                        {% for doctor in doctors %}
+
+                        <option value="{{ doctor['id'] }}"
+                            {% if doctor['id'] == appointment['doctor_id'] %}
+                                selected
+                            {% endif %}>
+
+                            Dr. {{ doctor['fullname'] }}
+                            - {{ doctor['department'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DEPARTMENT -->
+
+                <div class="appointment-form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select id="department"
+                            name="department"
+                            required>
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="Cardiology"
+                            {% if appointment['department'] == 'Cardiology' %}
+                                selected
+                            {% endif %}>
+                            Cardiology
+                        </option>
+
+                        <option value="Neurology"
+                            {% if appointment['department'] == 'Neurology' %}
+                                selected
+                            {% endif %}>
+                            Neurology
+                        </option>
+
+                        <option value="Orthopedics"
+                            {% if appointment['department'] == 'Orthopedics' %}
+                                selected
+                            {% endif %}>
+                            Orthopedics
+                        </option>
+
+                        <option value="Pediatrics"
+                            {% if appointment['department'] == 'Pediatrics' %}
+                                selected
+                            {% endif %}>
+                            Pediatrics
+                        </option>
+
+                        <option value="Dermatology"
+                            {% if appointment['department'] == 'Dermatology' %}
+                                selected
+                            {% endif %}>
+                            Dermatology
+                        </option>
+
+                        <option value="General Medicine"
+                            {% if appointment['department'] == 'General Medicine' %}
+                                selected
+                            {% endif %}>
+                            General Medicine
+                        </option>
+
+                        <option value="Gynecology"
+                            {% if appointment['department'] == 'Gynecology' %}
+                                selected
+                            {% endif %}>
+                            Gynecology
+                        </option>
+
+                        <option value="ENT"
+                            {% if appointment['department'] == 'ENT' %}
+                                selected
+                            {% endif %}>
+                            ENT
+                        </option>
+
+                        <option value="Dental"
+                            {% if appointment['department'] == 'Dental' %}
+                                selected
+                            {% endif %}>
+                            Dental
+                        </option>
+
+                        <option value="Emergency"
+                            {% if appointment['department'] == 'Emergency' %}
+                                selected
+                            {% endif %}>
+                            Emergency
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="appointment-form-group">
+
+                    <label for="appointment_date">
+                        Appointment Date
+                    </label>
+
+                    <input type="date"
+                           id="appointment_date"
+                           name="appointment_date"
+                           value="{{ appointment['appointment_date'] }}"
+                           required>
+
+                </div>
+
+
+                <!-- TIME -->
+
+                <div class="appointment-form-group">
+
+                    <label for="appointment_time">
+                        Appointment Time
+                    </label>
+
+                    <input type="time"
+                           id="appointment_time"
+                           name="appointment_time"
+                           value="{{ appointment['appointment_time'] }}"
+                           required>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="appointment-form-group">
+
+                    <label for="status">
+                        Appointment Status
+                    </label>
+
+                    <select id="status"
+                            name="status"
+                            required>
+
+                        <option value="Scheduled"
+                            {% if appointment['status'] == 'Scheduled' %}
+                                selected
+                            {% endif %}>
+                            Scheduled
+                        </option>
+
+                        <option value="Completed"
+                            {% if appointment['status'] == 'Completed' %}
+                                selected
+                            {% endif %}>
+                            Completed
+                        </option>
+
+                        <option value="Cancelled"
+                            {% if appointment['status'] == 'Cancelled' %}
+                                selected
+                            {% endif %}>
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- REASON -->
+
+                <div class="appointment-form-group appointment-full-width">
+
+                    <label for="reason">
+                        Reason for Visit
+                    </label>
+
+                    <textarea id="reason"
+                              name="reason"
+                              rows="4"
+                              placeholder="Enter reason for appointment">{{ appointment['reason'] or '' }}</textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="appointment-form-buttons">
+
+
+                <button type="submit"
+                        class="appointment-save-btn">
+
+                    Update Appointment
+
+                </button>
+
+
+                <a href="/appointments"
+                   class="appointment-cancel-btn">
+
+                    Cancel
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>
