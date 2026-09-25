@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Bill - Hospital Management System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #302b63;
+            padding: 16px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            color: white;
+            font-size: 22px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: #8e44ad;
+        }
+
+        .nav-links .active {
+            background: #8e44ad;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #302b63;
+            font-size: 28px;
+        }
+
+        .page-title p {
+            color: #666;
+            margin-top: 6px;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: white;
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .form-card h2 {
+            color: #302b63;
+            margin-bottom: 25px;
+            font-size: 21px;
+        }
+
+        /* ================= FORM GRID ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        input,
+        select {
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #8e44ad;
+
+            box-shadow: 0 0 5px rgba(142,68,173,0.2);
+        }
+
+        /* ================= TOTAL ================= */
+
+        .total-box {
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #f5eff9;
+
+            border-left: 5px solid #8e44ad;
+
+            border-radius: 7px;
+        }
+
+        .total-box h3 {
+            color: #302b63;
+        }
+
+        #total_amount {
+            font-size: 22px;
+            font-weight: bold;
+            color: #8e44ad;
+        }
+
+        /* ================= ERROR ================= */
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+
+            padding: 12px;
+
+            border-radius: 6px;
+
+            margin-bottom: 20px;
+
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .update-btn {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .update-btn:hover {
+            background: #6c3483;
+        }
+
+        .cancel-btn {
+            background: #777;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #555;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="navbar">
+
+    <h2>Hospital Management System</h2>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/patients">
+            Patients
+        </a>
+
+        <a href="/doctors">
+            Doctors
+        </a>
+
+        <a href="/appointments">
+            Appointments
+        </a>
+
+        <a href="/pharmacy">
+            Pharmacy
+        </a>
+
+        <a href="/laboratory">
+            Laboratory
+        </a>
+
+        <a href="/billing" class="active">
+            Billing
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN CONTAINER ================= -->
+
+<div class="container">
+
+
+    <div class="page-title">
+
+        <h1>Edit Bill</h1>
+
+        <p>
+            Update patient billing information
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <h2>Bill Information</h2>
+
+
+        <!-- ERROR MESSAGE -->
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- ================= FORM ================= -->
+
+        <form method="POST"
+              action="/edit-bill/{{ bill['id'] }}">
+
+
+            <div class="form-grid">
+
+
+                <!-- PATIENT -->
+
+                <div class="form-group">
+
+                    <label for="patient_id">
+                        Patient
+                    </label>
+
+                    <select
+                        id="patient_id"
+                        name="patient_id"
+                        required>
+
+                        <option value="">
+                            -- Select Patient --
+                        </option>
+
+                        {% for patient in patients %}
+
+                        <option
+                            value="{{ patient['id'] }}"
+                            {% if patient['id'] == bill['patient_id'] %}
+                            selected
+                            {% endif %}>
+
+                            {{ patient['fullname'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- BILL NUMBER -->
+
+                <div class="form-group">
+
+                    <label for="bill_number">
+                        Bill Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bill_number"
+                        name="bill_number"
+                        value="{{ bill['bill_number'] }}"
+                        required>
+
+                </div>
+
+
+                <!-- BILL DATE -->
+
+                <div class="form-group">
+
+                    <label for="bill_date">
+                        Bill Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="bill_date"
+                        name="bill_date"
+                        value="{{ bill['bill_date'] }}"
+                        required>
+
+                </div>
+
+
+                <!-- PAYMENT STATUS -->
+
+                <div class="form-group">
+
+                    <label for="payment_status">
+                        Payment Status
+                    </label>
+
+                    <select
+                        id="payment_status"
+                        name="payment_status"
+                        required>
+
+                        <option
+                            value="Pending"
+                            {% if bill['payment_status'] == 'Pending' %}
+                            selected
+                            {% endif %}>
+                            Pending
+                        </option>
+
+                        <option
+                            value="Paid"
+                            {% if bill['payment_status'] == 'Paid' %}
+                            selected
+                            {% endif %}>
+                            Paid
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- CONSULTATION -->
+
+                <div class="form-group">
+
+                    <label for="consultation_fee">
+                        Consultation Fee (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="consultation_fee"
+                        name="consultation_fee"
+                        value="{{ bill['consultation_fee'] }}"
+                        min="0"
+                        step="0.01"
+                        oninput="calculateTotal()">
+
+                </div>
+
+
+                <!-- MEDICINE -->
+
+                <div class="form-group">
+
+                    <label for="medicine_charges">
+                        Medicine Charges (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="medicine_charges"
+                        name="medicine_charges"
+                        value="{{ bill['medicine_charges'] }}"
+                        min="0"
+                        step="0.01"
+                        oninput="calculateTotal()">
+
+                </div>
+
+
+                <!-- LABORATORY -->
+
+                <div class="form-group">
+
+                    <label for="laboratory_charges">
+                        Laboratory Charges (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="laboratory_charges"
+                        name="laboratory_charges"
+                        value="{{ bill['laboratory_charges'] }}"
+                        min="0"
+                        step="0.01"
+                        oninput="calculateTotal()">
+
+                </div>
+
+
+                <!-- OTHER -->
+
+                <div class="form-group">
+
+                    <label for="other_charges">
+                        Other Charges (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="other_charges"
+                        name="other_charges"
+                        value="{{ bill['other_charges'] }}"
+                        min="0"
+                        step="0.01"
+                        oninput="calculateTotal()">
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TOTAL ================= -->
+
+            <div class="total-box">
+
+                <h3>
+                    Total Amount:
+                    ₹<span id="total_amount">0.00</span>
+                </h3>
+
+            </div>
+
+
+            <!-- ================= BUTTONS ================= -->
+
+            <div class="buttons">
+
+                <a
+                    href="/billing"
+                    class="btn cancel-btn">
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn update-btn">
+                    Update Bill
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+function calculateTotal() {
+
+    let consultation =
+        parseFloat(
+            document.getElementById(
+                "consultation_fee"
+            ).value
+        ) || 0;
+
+
+    let medicine =
+        parseFloat(
+            document.getElementById(
+                "medicine_charges"
+            ).value
+        ) || 0;
+
+
+    let laboratory =
+        parseFloat(
+            document.getElementById(
+                "laboratory_charges"
+            ).value
+        ) || 0;
+
+
+    let other =
+        parseFloat(
+            document.getElementById(
+                "other_charges"
+            ).value
+        ) || 0;
+
+
+    let total =
+        consultation
+        + medicine
+        + laboratory
+        + other;
+
+
+    document.getElementById(
+        "total_amount"
+    ).innerText = total.toFixed(2);
+
+}
+
+
+/* Calculate total when page loads */
+
+window.onload = function() {
+
+    calculateTotal();
+
+};
+
+</script>
+
+
+</body>
+
+</html>
