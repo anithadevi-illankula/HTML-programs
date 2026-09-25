@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+   <style>
+
+    /* ================= APPOINTMENT SEARCH & FILTER ================= */
+
+.appointment-filter {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+.appointment-filter form {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+/* ================= FILTER GROUP ================= */
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+}
+
+.filter-group label {
+    margin-bottom: 7px;
+    color: #302b63;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 11px 12px;
+    border: 1px solid #d5d9e2;
+    border-radius: 7px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: #8e44ad;
+    box-shadow: 0 0 0 3px rgba(142,68,173,0.10);
+}
+
+
+/* ================= FILTER BUTTONS ================= */
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.filter-buttons button {
+    background: #8e44ad;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filter-buttons button:hover {
+    background: #732d91;
+}
+
+.filter-buttons a {
+    background: #e9ecef;
+    color: #333;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.filter-buttons a:hover {
+    background: #d6d8db;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .appointment-filter form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .filter-buttons {
+        width: 100%;
+    }
+
+    .filter-buttons button,
+    .filter-buttons a {
+        flex: 1;
+        text-align: center;
+    }
+
+}
+
+/* ================= APPOINTMENT STATUS ================= */
+
+.appointment-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status-scheduled {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-default {
+    background: #e9ecef;
+    color: #555;
+}
+   </style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Appointments - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <h2>🏥 MediCare Hospital</h2>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/appointments" class="active">
+            Appointments
+        </a>
+
+        <a href="/add-appointment">
+            Add Appointment
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= APPOINTMENT PAGE ================= -->
+
+<main class="appointment-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="appointment-header">
+
+        <div>
+
+            <h1>
+                Appointment Management
+            </h1>
+
+            <p>
+                Schedule and manage patient appointments.
+            </p>
+
+        </div>
+
+
+        <a href="/add-appointment"
+           class="appointment-add-btn">
+
+            + Add Appointment
+
+        </a>
+
+    </div>
+
+    <!-- ================= SEARCH & FILTER ================= -->
+
+<div class="appointment-filter">
+
+    <form action="/appointments" method="GET">
+
+        <div class="filter-group">
+
+            <label>Search</label>
+
+            <input
+                type="text"
+                name="search"
+                value="{{ search }}"
+                placeholder="Search patient or doctor"
+            >
+
+        </div>
+
+
+        <div class="filter-group">
+
+            <label>Status</label>
+
+            <select name="status">
+
+                <option value="">
+                    All Status
+                </option>
+
+                <option value="Scheduled"
+                    {% if status == "Scheduled" %}selected{% endif %}>
+                    Scheduled
+                </option>
+
+                <option value="Completed"
+                    {% if status == "Completed" %}selected{% endif %}>
+                    Completed
+                </option>
+
+                <option value="Cancelled"
+                    {% if status == "Cancelled" %}selected{% endif %}>
+                    Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="filter-buttons">
+
+            <button type="submit">
+                🔍 Search
+            </button>
+
+            <a href="/appointments">
+                Clear
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+    <!-- ================= APPOINTMENT TABLE ================= -->
+
+    {% if appointments %}
+
+    <div class="appointment-table-container">
+
+        <table class="appointment-table">
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        ID
+                    </th>
+
+                    <th>
+                        Patient
+                    </th>
+
+                    <th>
+                        Doctor
+                    </th>
+
+                    <th>
+                        Department
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Reason
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                {% for appointment in appointments %}
+
+                <tr>
+
+
+                    <!-- ID -->
+
+                    <td>
+                        {{ appointment['id'] }}
+                    </td>
+
+
+                    <!-- PATIENT -->
+
+                    <td class="appointment-patient">
+
+                        👤
+                        {{ appointment['patient_name'] }}
+
+                    </td>
+
+
+                    <!-- DOCTOR -->
+
+                    <td class="appointment-doctor">
+
+                        👨‍⚕️
+                        {{ appointment['doctor_name'] }}
+
+                    </td>
+
+
+                    <!-- DEPARTMENT -->
+
+                    <td>
+
+                        <span class="appointment-department">
+
+                            {{ appointment['department'] }}
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- DATE -->
+
+                    <td>
+
+                        📅
+                        {{ appointment['appointment_date'] }}
+
+                    </td>
+
+
+                    <!-- TIME -->
+
+                    <td>
+
+                        🕐
+                        {{ appointment['appointment_time'] }}
+
+                    </td>
+
+
+                    <!-- REASON -->
+
+                    <td>
+
+                        {% if appointment['reason'] %}
+
+                            {{ appointment['reason'] }}
+
+                        {% else %}
+
+                            <span class="not-provided">
+                                Not Provided
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        {% if appointment['status'] == 'Scheduled' %}
+
+                            <span class="appointment-status status-scheduled">
+                                Scheduled
+                            </span>
+
+                        {% elif appointment['status'] == 'Completed' %}
+
+                            <span class="appointment-status status-completed">
+                                Completed
+                            </span>
+
+                        {% elif appointment['status'] == 'Cancelled' %}
+
+                            <span class="appointment-status status-cancelled">
+                                Cancelled
+                            </span>
+
+                        {% else %}
+
+                            <span class="appointment-status status-default">
+                                {{ appointment['status'] }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- ACTIONS -->
+
+                    <td>
+
+                        <div class="appointment-actions">
+
+
+                            <a href="/edit-appointment/{{ appointment['id'] }}"
+                               class="appointment-edit-btn">
+
+                                Edit
+
+                            </a>
+
+
+                            <a href="/delete-appointment/{{ appointment['id'] }}"
+                               class="appointment-delete-btn"
+                               onclick="return confirm('Are you sure you want to delete this appointment?');">
+
+                                Delete
+
+                            </a>
+
+
+                        </div>
+
+                    </td>
+
+
+                </tr>
+
+                {% endfor %}
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- ================= NO APPOINTMENTS ================= -->
+
+    <div class="appointment-table-container">
+
+        <div class="no-appointments">
+
+            <div class="no-appointments-icon">
+                📅
+            </div>
+
+            <h3>
+                No Appointments Found
+            </h3>
+
+            <p>
+                There are currently no appointments
+                registered in the hospital system.
+            </p>
+
+            <a href="/add-appointment"
+               class="appointment-add-btn">
+
+                + Add First Appointment
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% endif %}
+
+
+</main>
+
+
+</body>
+
+</html>
