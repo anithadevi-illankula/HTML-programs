@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Patient Profile - MediCare Hospital</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #302b63;
+            color: white;
+
+            padding: 16px 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+
+        .navbar h2 {
+            font-size: 20px;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+
+            padding: 9px 13px;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+        }
+
+
+        .nav-links a:hover,
+        .nav-links .active {
+            background: #8e44ad;
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+
+            margin: 35px auto;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .page-header {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-header h1 {
+            color: #302b63;
+
+            font-size: 27px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .page-header p {
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= PROFILE ================= */
+
+        .profile-card {
+            background: white;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+
+            overflow: hidden;
+        }
+
+
+        .profile-top {
+            background: linear-gradient(
+                135deg,
+                #302b63,
+                #8e44ad
+            );
+
+            color: white;
+
+            padding: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .patient-icon {
+            width: 75px;
+            height: 75px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 38px;
+        }
+
+
+        .profile-top h2 {
+            font-size: 25px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .profile-top p {
+            opacity: 0.9;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= INFORMATION ================= */
+
+        .profile-body {
+            padding: 30px;
+        }
+
+
+        .section-title {
+            color: #302b63;
+
+            font-size: 20px;
+
+            margin-bottom: 20px;
+
+            border-left: 5px solid #8e44ad;
+
+            padding-left: 10px;
+        }
+
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .info-box {
+            background: #f8f7ff;
+
+            border-radius: 10px;
+
+            padding: 17px;
+
+            border: 1px solid #eeeeee;
+        }
+
+
+        .info-label {
+            color: #777;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+
+            text-transform: uppercase;
+        }
+
+
+        .info-value {
+            color: #302b63;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+
+        /* ================= ACTIONS ================= */
+
+        .actions {
+            margin-top: 30px;
+
+            display: flex;
+
+            gap: 12px;
+        }
+
+
+        .btn {
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .edit-btn {
+            background: #8e44ad;
+
+            color: white;
+        }
+
+
+        .edit-btn:hover {
+            background: #732d91;
+
+            transform: translateY(-2px);
+        }
+
+
+        .back-btn {
+            background: #e9ecef;
+
+            color: #333;
+        }
+
+
+        .back-btn:hover {
+            background: #d6d8db;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 12px;
+
+                align-items: flex-start;
+            }
+
+
+            .nav-links {
+                flex-wrap: wrap;
+            }
+
+
+            .container {
+                width: 95%;
+            }
+
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .profile-top {
+                padding: 25px;
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+
+            .actions {
+                flex-direction: column;
+            }
+
+
+            .btn {
+                text-align: center;
+            }
+
+        }
+
+        /* ================= APPOINTMENT HISTORY ================= */
+
+.appointment-history {
+    margin-top: 35px;
+}
+
+.appointment-history .section-title {
+    margin-bottom: 20px;
+}
+
+
+/* ================= APPOINTMENT TABLE ================= */
+
+.appointment-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    border: 1px solid #eeeeee;
+}
+
+.appointment-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.appointment-table th {
+    background: #302b63;
+    color: white;
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.appointment-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #eeeeee;
+    color: #555;
+    font-size: 13px;
+}
+
+.appointment-table tbody tr:hover {
+    background: #faf8ff;
+}
+
+.appointment-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ================= STATUS BADGES ================= */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.status-scheduled {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+
+/* ================= NO APPOINTMENTS ================= */
+
+.no-appointments {
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+    color: #777;
+    font-size: 14px;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .appointment-history {
+        margin-top: 25px;
+    }
+
+    .appointment-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .appointment-table {
+        min-width: 750px;
+    }
+
+}
+
+/* ================= BILLING HISTORY ================= */
+
+.billing-history {
+    margin-top: 30px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.billing-history .section-title {
+    margin-bottom: 20px;
+    color: #302b63;
+}
+
+.billing-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.billing-table {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: collapse;
+}
+
+.billing-table th {
+    background: #302b63;
+    color: white;
+    padding: 13px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.billing-table td {
+    padding: 13px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 13px;
+}
+
+.billing-table tr:hover {
+    background: #f8f7ff;
+}
+
+.total-amount {
+    font-weight: bold;
+    color: #6c2ca8;
+}
+
+.payment-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.payment-paid {
+    background: #d4edda;
+    color: #155724;
+}
+
+.payment-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.payment-default {
+    background: #e9ecef;
+    color: #555555;
+}
+
+.no-bills {
+    text-align: center;
+    padding: 25px;
+    color: #777777;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* ================= LAB HISTORY ================= */
+
+.lab-history {
+    margin-top: 30px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.lab-history .section-title {
+    margin-bottom: 20px;
+    color: #302b63;
+}
+
+.lab-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.lab-table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+.lab-table th {
+    background: #302b63;
+    color: white;
+    padding: 13px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.lab-table td {
+    padding: 13px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 13px;
+}
+
+.lab-table tr:hover {
+    background: #f8f7ff;
+}
+
+.lab-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.lab-completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.lab-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.lab-default {
+    background: #e9ecef;
+    color: #555555;
+}
+
+.no-lab-tests {
+    text-align: center;
+    padding: 25px;
+    color: #777777;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <h2>🏥 MediCare Hospital</h2>
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/patients" class="active">
+                Patients
+            </a>
+
+            <a href="/add-patient">
+                Add Patient
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <h1>
+                👤 Patient Profile
+            </h1>
+
+            <p>
+                Complete information about the selected patient.
+            </p>
+
+        </section>
+
+
+        <!-- ================= PROFILE CARD ================= -->
+
+        <section class="profile-card">
+
+
+            <!-- PROFILE TOP -->
+
+            <div class="profile-top">
+
+                <div class="patient-icon">
+                    👤
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        {{ patient.fullname }}
+                    </h2>
+
+                    <p>
+                        Patient ID: #{{ patient.id }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE BODY -->
+
+            <div class="profile-body">
+
+
+                <h2 class="section-title">
+                    Patient Information
+                </h2>
+
+
+                <div class="info-grid">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Full Name
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.fullname }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- AGE -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Age
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.age }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENDER -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Gender
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.gender }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Phone
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.phone }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Email
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.email }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Address
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.address }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- DISEASE -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Disease / Health Issue
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.disease }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- DOCTOR -->
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Assigned Doctor
+                        </div>
+
+                        <div class="info-value">
+                            {{ patient.doctor }}
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <!-- ================= APPOINTMENT HISTORY ================= -->
+
+<section class="appointment-history">
+
+    <h2 class="section-title">
+        📅 Appointment History
+    </h2>
+
+    {% if appointments %}
+
+    <div class="appointment-table-wrapper">
+
+        <table class="appointment-table">
+
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Doctor</th>
+                    <th>Department</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for appointment in appointments %}
+
+                <tr>
+
+                    <td>
+                        {{ appointment.appointment_date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_time }}
+                    </td>
+
+                    <td>
+                        👨‍⚕️ {{ appointment.doctor_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.department }}
+                    </td>
+
+                    <td>
+                        {{ appointment.reason or "—" }}
+                    </td>
+
+                    <td>
+
+                        <span class="status-badge
+                            {% if appointment.status == 'Completed' %}
+                                status-completed
+                            {% elif appointment.status == 'Cancelled' %}
+                                status-cancelled
+                            {% else %}
+                                status-scheduled
+                            {% endif %}
+                        ">
+
+                            {{ appointment.status }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="no-appointments">
+        📅 No appointment history available.
+    </div>
+
+    {% endif %}
+
+</section>
+
+<!-- ================= BILLING HISTORY ================= -->
+
+<section class="billing-history">
+
+    <h2 class="section-title">
+        💳 Billing History
+    </h2>
+
+    {% if bills %}
+
+    <div class="billing-table-wrapper">
+
+        <table class="billing-table">
+
+            <thead>
+
+                <tr>
+                    <th>Bill Number</th>
+                    <th>Date</th>
+                    <th>Consultation</th>
+                    <th>Medicine</th>
+                    <th>Laboratory</th>
+                    <th>Other</th>
+                    <th>Total</th>
+                    <th>Payment Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for bill in bills %}
+
+                <tr>
+
+                    <td>
+                        {{ bill.bill_number }}
+                    </td>
+
+                    <td>
+                        {{ bill.bill_date }}
+                    </td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill.consultation_fee) }}
+                    </td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill.medicine_charges) }}
+                    </td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill.laboratory_charges) }}
+                    </td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill.other_charges) }}
+                    </td>
+
+                    <td class="total-amount">
+                        ₹{{ "%.2f"|format(bill.total_amount) }}
+                    </td>
+
+                    <td>
+
+                        <span class="payment-status
+                            {% if bill.payment_status == 'Paid' %}
+                                payment-paid
+                            {% elif bill.payment_status == 'Pending' %}
+                                payment-pending
+                            {% else %}
+                                payment-default
+                            {% endif %}
+                        ">
+
+                            {{ bill.payment_status }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="no-bills">
+        💳 No billing history available.
+    </div>
+
+    {% endif %}
+
+</section>
+
+<!-- ================= LAB HISTORY ================= -->
+
+<section class="lab-history">
+
+    <h2 class="section-title">
+        🧪 Laboratory History
+    </h2>
+
+    {% if lab_tests %}
+
+    <div class="lab-table-wrapper">
+
+        <table class="lab-table">
+
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Test Date</th>
+                    <th>Result</th>
+                    <th>Normal Range</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for test in lab_tests %}
+
+                <tr>
+
+                    <td>
+                        🧪 {{ test.test_name }}
+                    </td>
+
+                    <td>
+                        {{ test.test_date }}
+                    </td>
+
+                    <td>
+                        {{ test.result or "—" }}
+                    </td>
+
+                    <td>
+                        {{ test.normal_range or "—" }}
+                    </td>
+
+                    <td>
+                        👨‍⚕️ {{ test.doctor or "—" }}
+                    </td>
+
+                    <td>
+
+                        <span class="lab-status
+                            {% if test.status == 'Completed' %}
+                                lab-completed
+                            {% elif test.status == 'Pending' %}
+                                lab-pending
+                            {% else %}
+                                lab-default
+                            {% endif %}
+                        ">
+
+                            {{ test.status }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="no-lab-tests">
+        🧪 No laboratory history available.
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="actions">
+
+                    <a
+                        href="/edit-patient/{{ patient.id }}"
+                        class="btn edit-btn"
+                    >
+                        ✏️ Edit Patient
+                    </a>
+
+
+                    <a
+                        href="/patients"
+                        class="btn back-btn"
+                    >
+                        ← Back to Patients
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
