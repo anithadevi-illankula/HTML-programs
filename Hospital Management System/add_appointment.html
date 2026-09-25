@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Appointment - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        MediCare Hospital
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/patients">
+            Patients
+        </a>
+
+        <a href="/doctors">
+            Doctors
+        </a>
+
+        <a href="/appointments" class="active">
+            Appointments
+        </a>
+
+        <a href="#">
+            Pharmacy
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= ADD APPOINTMENT ================= -->
+
+<main class="appointment-form-page">
+
+    <div class="appointment-form-card">
+
+
+        <h1>
+            Add New Appointment
+        </h1>
+
+
+        <p>
+            Schedule an appointment for a patient with a doctor.
+        </p>
+
+
+        <form method="POST">
+
+
+            <div class="appointment-form-grid">
+
+
+                <!-- PATIENT -->
+
+                <div class="appointment-form-group">
+
+                    <label for="patient_id">
+                        Select Patient
+                    </label>
+
+                    <select id="patient_id"
+                            name="patient_id"
+                            required>
+
+                        <option value="">
+                            Select Patient
+                        </option>
+
+
+                        {% for patient in patients %}
+
+                        <option value="{{ patient['id'] }}">
+
+                            {{ patient['fullname'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DOCTOR -->
+
+                <div class="appointment-form-group">
+
+                    <label for="doctor_id">
+                        Select Doctor
+                    </label>
+
+                    <select id="doctor_id"
+                            name="doctor_id"
+                            required>
+
+                        <option value="">
+                            Select Doctor
+                        </option>
+
+
+                        {% for doctor in doctors %}
+
+                        <option value="{{ doctor['id'] }}">
+
+                            Dr. {{ doctor['fullname'] }}
+                            - {{ doctor['department'] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DEPARTMENT -->
+
+                <div class="appointment-form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select id="department"
+                            name="department"
+                            required>
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="Cardiology">
+                            Cardiology
+                        </option>
+
+                        <option value="Neurology">
+                            Neurology
+                        </option>
+
+                        <option value="Orthopedics">
+                            Orthopedics
+                        </option>
+
+                        <option value="Pediatrics">
+                            Pediatrics
+                        </option>
+
+                        <option value="Dermatology">
+                            Dermatology
+                        </option>
+
+                        <option value="General Medicine">
+                            General Medicine
+                        </option>
+
+                        <option value="Gynecology">
+                            Gynecology
+                        </option>
+
+                        <option value="ENT">
+                            ENT
+                        </option>
+
+                        <option value="Dental">
+                            Dental
+                        </option>
+
+                        <option value="Emergency">
+                            Emergency
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="appointment-form-group">
+
+                    <label for="appointment_date">
+                        Appointment Date
+                    </label>
+
+                    <input type="date"
+                           id="appointment_date"
+                           name="appointment_date"
+                           required>
+
+                </div>
+
+
+                <!-- TIME -->
+
+                <div class="appointment-form-group">
+
+                    <label for="appointment_time">
+                        Appointment Time
+                    </label>
+
+                    <input type="time"
+                           id="appointment_time"
+                           name="appointment_time"
+                           required>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="appointment-form-group">
+
+                    <label for="status">
+                        Appointment Status
+                    </label>
+
+                    <select id="status"
+                            name="status"
+                            required>
+
+                        <option value="Scheduled">
+                            Scheduled
+                        </option>
+
+                        <option value="Completed">
+                            Completed
+                        </option>
+
+                        <option value="Cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- REASON -->
+
+                <div class="appointment-form-group appointment-full-width">
+
+                    <label for="reason">
+                        Reason for Visit
+                    </label>
+
+                    <textarea id="reason"
+                              name="reason"
+                              rows="4"
+                              placeholder="Enter reason for appointment"></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="appointment-form-buttons">
+
+
+                <button type="submit"
+                        class="appointment-save-btn">
+
+                    Save Appointment
+
+                </button>
+
+
+                <a href="/appointments"
+                   class="appointment-cancel-btn">
+
+                    Cancel
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>
