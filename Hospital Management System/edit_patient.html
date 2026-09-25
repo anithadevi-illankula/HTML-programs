@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Patient - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            MediCare Hospital
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/add-patient">
+                Add Patient
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- EDIT PATIENT FORM -->
+
+    <main class="form-page">
+
+        <div class="patient-form-card">
+
+            <h1>
+                Edit Patient
+            </h1>
+
+            <p>
+                Update patient information.
+            </p>
+
+
+            <form method="POST">
+
+
+                <!-- FULL NAME -->
+
+                <label>
+                    Full Name
+                </label>
+
+                <input type="text"
+                       name="fullname"
+                       value="{{ patient['fullname'] }}"
+                       required>
+
+
+                <!-- AGE -->
+
+                <label>
+                    Age
+                </label>
+
+                <input type="number"
+                       name="age"
+                       value="{{ patient['age'] }}"
+                       min="1"
+                       max="120"
+                       required>
+
+
+                <!-- GENDER -->
+
+                <label>
+                    Gender
+                </label>
+
+                <select name="gender" required>
+
+                    <option value="Male"
+                        {% if patient['gender'] == 'Male' %}selected{% endif %}>
+                        Male
+                    </option>
+
+                    <option value="Female"
+                        {% if patient['gender'] == 'Female' %}selected{% endif %}>
+                        Female
+                    </option>
+
+                    <option value="Other"
+                        {% if patient['gender'] == 'Other' %}selected{% endif %}>
+                        Other
+                    </option>
+
+                </select>
+
+
+                <!-- PHONE -->
+
+                <label>
+                    Phone
+                </label>
+
+                <input type="tel"
+                       name="phone"
+                       value="{{ patient['phone'] }}"
+                       required>
+
+
+                <!-- EMAIL -->
+
+                <label>
+                    Email
+                </label>
+
+                <input type="email"
+                       name="email"
+                       value="{{ patient['email'] }}">
+
+
+                <!-- ADDRESS -->
+
+                <label>
+                    Address
+                </label>
+
+                <textarea name="address"
+                          rows="3">{{ patient['address'] }}</textarea>
+
+
+                <!-- DISEASE -->
+
+                <label>
+                    Disease / Health Issue
+                </label>
+
+                <input type="text"
+                       name="disease"
+                       value="{{ patient['disease'] }}"
+                       required>
+
+
+                <!-- DOCTOR -->
+
+                <label>
+                    Doctor
+                </label>
+
+                <input type="text"
+                       name="doctor"
+                       value="{{ patient['doctor'] }}"
+                       required>
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-buttons">
+
+                    <button type="submit"
+                            class="save-btn">
+
+                        Update Patient
+
+                    </button>
+
+                    <a href="/patients"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>
