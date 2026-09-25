@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Laboratory Test</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: linear-gradient(
+                135deg,
+                #302b63,
+                #5f4bb6
+            );
+
+            color: white;
+
+            padding: 18px 35px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+        }
+
+        .navbar h2 {
+            font-size: 23px;
+        }
+
+        .nav-links {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            padding: 9px 13px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.18);
+        }
+
+        .nav-links .active {
+            background: #8e44ad;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 92%;
+
+            max-width: 1000px;
+
+            margin: 35px auto;
+        }
+
+        /* ================= HEADER ================= */
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            color: #302b63;
+
+            font-size: 30px;
+
+            margin-bottom: 7px;
+        }
+
+        .page-header p {
+            color: #777;
+
+            font-size: 15px;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            color: #302b63;
+
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d5d9e2;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.3s;
+
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #8e44ad;
+
+            box-shadow:
+                0 0 0 3px rgba(142,68,173,0.10);
+        }
+
+        /* ================= REQUIRED ================= */
+
+        .required {
+            color: #e74c3c;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            transition: 0.3s;
+        }
+
+        .update-btn {
+            background: #8e44ad;
+
+            color: white;
+        }
+
+        .update-btn:hover {
+            background: #732d91;
+
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: #e9ecef;
+
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background: #d6d8db;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <h2>🏥 Hospital Management System</h2>
+
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/pharmacy">
+                Pharmacy
+            </a>
+
+            <a href="/laboratory" class="active">
+                Laboratory
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <div class="page-header">
+
+            <h1>✏️ Edit Laboratory Test</h1>
+
+            <p>
+                Update the laboratory test details below.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FORM ================= -->
+
+        <div class="form-card">
+
+
+            <form
+                action="/edit-lab-test/{{ lab_test['id'] }}"
+                method="POST"
+            >
+
+
+                <div class="form-grid">
+
+
+                    <!-- PATIENT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Patient
+                            <span class="required">*</span>
+                        </label>
+
+
+                        <select
+                            name="patient_id"
+                            required
+                        >
+
+                            {% for patient in patients %}
+
+                            <option
+                                value="{{ patient['id'] }}"
+                                {% if patient['id'] == lab_test['patient_id'] %}
+                                selected
+                                {% endif %}
+                            >
+
+                                {{ patient['fullname'] }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TEST NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Test Name
+                            <span class="required">*</span>
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="test_name"
+                            value="{{ lab_test['test_name'] }}"
+                            placeholder="Example: Blood Test"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TEST DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Test Date
+                            <span class="required">*</span>
+                        </label>
+
+
+                        <input
+                            type="date"
+                            name="test_date"
+                            value="{{ lab_test['test_date'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- RESULT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Result
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="result"
+                            value="{{ lab_test['result'] or '' }}"
+                            placeholder="Example: Hemoglobin 13.5 g/dL"
+                        >
+
+                    </div>
+
+
+                    <!-- NORMAL RANGE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Normal Range
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="normal_range"
+                            value="{{ lab_test['normal_range'] or '' }}"
+                            placeholder="Example: 12 - 16 g/dL"
+                        >
+
+                    </div>
+
+
+                    <!-- DOCTOR -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Doctor
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="doctor"
+                            value="{{ lab_test['doctor'] or '' }}"
+                            placeholder="Doctor name"
+                        >
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                            <span class="required">*</span>
+                        </label>
+
+
+                        <select
+                            name="status"
+                            required
+                        >
+
+                            <option
+                                value="Pending"
+                                {% if lab_test['status'] == 'Pending' %}
+                                selected
+                                {% endif %}
+                            >
+                                Pending
+                            </option>
+
+
+                            <option
+                                value="Processing"
+                                {% if lab_test['status'] == 'Processing' %}
+                                selected
+                                {% endif %}
+                            >
+                                Processing
+                            </option>
+
+
+                            <option
+                                value="Completed"
+                                {% if lab_test['status'] == 'Completed' %}
+                                selected
+                                {% endif %}
+                            >
+                                Completed
+                            </option>
+
+
+                            <option
+                                value="Cancelled"
+                                {% if lab_test['status'] == 'Cancelled' %}
+                                selected
+                                {% endif %}
+                            >
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================= BUTTONS ================= -->
+
+                <div class="buttons">
+
+                    <a
+                        href="/laboratory"
+                        class="btn cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn update-btn"
+                    >
+                        Update Laboratory Test
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
