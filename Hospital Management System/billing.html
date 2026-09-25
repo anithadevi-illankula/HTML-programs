@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Billing Management</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: #302b63;
+            padding: 16px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            color: white;
+            font-size: 22px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #8e44ad;
+        }
+
+        .nav-links .active {
+            background: #8e44ad;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            color: #302b63;
+            font-size: 28px;
+        }
+
+        .page-header p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* ================= ADD BUTTON ================= */
+
+        .add-btn {
+            background: #8e44ad;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #6c3483;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 1100px;
+        }
+
+        th {
+            background: #302b63;
+
+            color: white;
+
+            padding: 14px 10px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        td {
+            padding: 13px 10px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #eee;
+
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8f5ff;
+        }
+
+        /* ================= AMOUNT ================= */
+
+        .amount {
+            font-weight: bold;
+            color: #302b63;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status {
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .paid {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* ================= ACTION BUTTONS ================= */
+
+        .edit-btn {
+            background: #3498db;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 7px 12px;
+
+            border-radius: 5px;
+
+            margin-right: 5px;
+
+            font-size: 12px;
+        }
+
+        .edit-btn:hover {
+            background: #217dbb;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 7px 12px;
+
+            border-radius: 5px;
+
+            font-size: 12px;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 40px;
+
+            color: #777;
+
+            font-size: 16px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <h2>🏥 MediCare Hospital</h2>
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/billing" class="active">
+            Billing
+        </a>
+
+        <a href="/add-bill">
+            Add Bill
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= MAIN CONTAINER ================= -->
+
+<div class="container">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Billing Management</h1>
+
+            <p>
+                Manage patient bills and payment details
+            </p>
+
+        </div>
+
+
+        <a href="/add-bill" class="add-btn">
+            + Add New Bill
+        </a>
+
+    </div>
+
+
+    <!-- ================= BILLING TABLE ================= -->
+
+    <div class="table-container">
+
+        {% if bills %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Bill Number</th>
+
+                    <th>Patient</th>
+
+                    <th>Bill Date</th>
+
+                    <th>Consultation</th>
+
+                    <th>Medicine</th>
+
+                    <th>Laboratory</th>
+
+                    <th>Other</th>
+
+                    <th>Total Amount</th>
+
+                    <th>Payment Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for bill in bills %}
+
+                <tr>
+
+                    <td>
+                        {{ bill["id"] }}
+                    </td>
+
+
+                    <td>
+                        <strong>
+                            {{ bill["bill_number"] }}
+                        </strong>
+                    </td>
+
+
+                    <td>
+                        {{ bill["patient_name"] }}
+                    </td>
+
+
+                    <td>
+                        {{ bill["bill_date"] }}
+                    </td>
+
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill["consultation_fee"]) }}
+                    </td>
+
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill["medicine_charges"]) }}
+                    </td>
+
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill["laboratory_charges"]) }}
+                    </td>
+
+
+                    <td>
+                        ₹{{ "%.2f"|format(bill["other_charges"]) }}
+                    </td>
+
+
+                    <td class="amount">
+
+                        ₹{{ "%.2f"|format(bill["total_amount"]) }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if bill["payment_status"] == "Paid" %}
+
+                        <span class="status paid">
+                            Paid
+                        </span>
+
+                        {% else %}
+
+                        <span class="status pending">
+                            Pending
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                   <td style="min-width: 320px; text-align: center; white-space: nowrap;">
+
+    <a href="/edit-bill/{{ bill['id'] }}"
+       style="
+       display:inline-block;
+       background:#3498db;
+       color:white;
+       padding:9px 14px;
+       margin:3px;
+       border-radius:6px;
+       text-decoration:none;
+       font-weight:bold;">
+        ✏️ Edit
+    </a>
+
+    <a href="/delete-bill/{{ bill['id'] }}"
+       onclick="return confirm('Are you sure you want to delete this bill?');"
+       style="
+       display:inline-block;
+       background:#e74c3c;
+       color:white;
+       padding:9px 14px;
+       margin:3px;
+       border-radius:6px;
+       text-decoration:none;
+       font-weight:bold;">
+        🗑️ Delete
+    </a>
+
+    <a href="/print-bill/{{ bill['id'] }}"
+       style="
+       display:inline-block;
+       background:#8e44ad;
+       color:white;
+       padding:9px 14px;
+       margin:3px;
+       border-radius:6px;
+       text-decoration:none;
+       font-weight:bold;">
+        🖨️ Print
+    </a>
+
+</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+        {% else %}
+
+        <div class="empty">
+
+            <p>No bills available.</p>
+
+            <br>
+
+            <a href="/add-bill" class="add-btn">
+                + Add First Bill
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
