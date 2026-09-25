@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Print Bill - MediCare Hospital</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+            padding: 30px;
+        }
+
+
+        .bill-container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+
+        .hospital-header {
+            text-align: center;
+            border-bottom: 2px solid #8e44ad;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+
+        .hospital-header h1 {
+            color: #8e44ad;
+            margin-bottom: 8px;
+        }
+
+
+        .hospital-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+
+        .bill-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+        .bill-title h2 {
+            color: #302b63;
+        }
+
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+
+        .detail-box {
+            background: #f8f9fc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+
+        .detail-box strong {
+            color: #302b63;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+
+        th {
+            background: #302b63;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        .total-row td {
+            font-weight: bold;
+            font-size: 18px;
+            color: #8e44ad;
+            border-top: 2px solid #8e44ad;
+        }
+
+
+        .payment-status {
+            margin-top: 20px;
+            padding: 12px;
+            background: #f3e8ff;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+
+        .print-btn,
+        .back-btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+
+        .print-btn {
+            background: #8e44ad;
+            color: white;
+        }
+
+
+        .back-btn {
+            background: #e9ecef;
+            color: #333;
+        }
+
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        @media print {
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .bill-container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .buttons {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .bill-container {
+                padding: 20px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="bill-container">
+
+
+    <!-- HOSPITAL HEADER -->
+
+    <div class="hospital-header">
+
+        <h1>🏥 MediCare Hospital</h1>
+
+        <p>
+            Quality Healthcare & Professional Medical Services
+        </p>
+
+    </div>
+
+
+    <!-- BILL TITLE -->
+
+    <div class="bill-title">
+
+        <h2>Patient Bill</h2>
+
+    </div>
+
+
+    <!-- PATIENT DETAILS -->
+
+    <div class="details">
+
+        <div class="detail-box">
+
+            <strong>Bill Number:</strong>
+
+            {{ bill['bill_number'] }}
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <strong>Bill Date:</strong>
+
+            {{ bill['bill_date'] }}
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <strong>Patient Name:</strong>
+
+            {{ bill['patient_name'] }}
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <strong>Phone:</strong>
+
+            {{ bill['patient_phone'] }}
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <strong>Email:</strong>
+
+            {{ bill['patient_email'] }}
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <strong>Address:</strong>
+
+            {{ bill['patient_address'] }}
+
+        </div>
+
+    </div>
+
+
+    <!-- BILL DETAILS -->
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Description</th>
+
+                <th>Amount</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <tr>
+
+                <td>Consultation Fee</td>
+
+                <td>
+                    ₹{{ "%.2f"|format(bill['consultation_fee']) }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>Medicine Charges</td>
+
+                <td>
+                    ₹{{ "%.2f"|format(bill['medicine_charges']) }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>Laboratory Charges</td>
+
+                <td>
+                    ₹{{ "%.2f"|format(bill['laboratory_charges']) }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>Other Charges</td>
+
+                <td>
+                    ₹{{ "%.2f"|format(bill['other_charges']) }}
+                </td>
+
+            </tr>
+
+
+            <tr class="total-row">
+
+                <td>Total Amount</td>
+
+                <td>
+                    ₹{{ "%.2f"|format(bill['total_amount']) }}
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <!-- PAYMENT STATUS -->
+
+    <div class="payment-status">
+
+        Payment Status:
+        {{ bill['payment_status'] }}
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+        <button
+            onclick="window.print()"
+            class="print-btn">
+
+            🖨️ Print Bill
+
+        </button>
+
+
+        <a
+            href="/billing"
+            class="back-btn">
+
+            ← Back to Billing
+
+        </a>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <p>Thank you for choosing MediCare Hospital.</p>
+
+        <p>This is a computer-generated bill.</p>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
