@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - MediCare Hospital</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         LOGIN PAGE
+         ========================================== -->
+
+    <section class="login-page">
+
+        <div class="login-container">
+
+
+            <!-- ==================================
+                 HOSPITAL NAME + LOGO
+                 ================================== -->
+
+            <div class="hospital-logo">
+
+                <h1>
+                    MediCare Hospital
+                </h1>
+
+                <div class="logo-circle">
+                    🏥
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 LOGIN CARD
+                 ================================== -->
+
+            <div class="login-card">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p class="login-description">
+                    Login to your account
+                </p>
+
+
+                <!-- ERROR MESSAGE -->
+
+                {% if error %}
+
+                    <div class="error-message">
+                        {{ error }}
+                    </div>
+
+                {% endif %}
+
+
+                <!-- LOGIN FORM -->
+
+                <form method="POST">
+
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <input type="text"
+                               name="username"
+                               placeholder="Enter your username"
+                               required>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input type="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               required>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button type="submit"
+                            class="login-button">
+
+                        Login
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- REGISTER LINK -->
+
+                <p class="register-text">
+
+                    Don't have an account?
+
+                    <a href="/register">
+                        Register here
+                    </a>
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>
