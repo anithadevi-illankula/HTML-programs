@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Hospital Management System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: #f4f7fc;
+
+            color: #333;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            background: linear-gradient(
+                135deg,
+                #302b63,
+                #5f4bb6
+            );
+
+            color: white;
+
+            padding: 18px 35px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+        }
+
+
+        .navbar h2 {
+
+            font-size: 23px;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .nav-links a {
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 9px 13px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .nav-links a:hover {
+
+            background: rgba(255,255,255,0.18);
+        }
+
+
+        .nav-links .active {
+
+            background: #8e44ad;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .dashboard {
+
+            width: 92%;
+
+            max-width: 1250px;
+
+            margin: 35px auto;
+        }
+
+
+        /* ================= WELCOME ================= */
+
+        .welcome-section {
+
+            background: linear-gradient(
+                135deg,
+                #302b63,
+                #8e44ad
+            );
+
+            color: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 25px rgba(48,43,99,0.18);
+        }
+
+
+        .welcome-section h1 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome-section p {
+
+            font-size: 15px;
+
+            opacity: 0.9;
+        }
+
+
+        /* ================= STAT CARDS ================= */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(6, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.07);
+
+            transition: 0.3s;
+
+            border-top: 4px solid #8e44ad;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.12);
+        }
+
+
+        .card-icon {
+
+            font-size: 35px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .card h3 {
+
+            color: #555;
+
+            font-size: 15px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .card-number {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #302b63;
+
+            margin-bottom: 12px;
+        }
+
+
+        .card a {
+
+            text-decoration: none;
+
+            color: #8e44ad;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        .card a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================= DIFFERENT CARD COLORS ================= */
+
+        .patients-card {
+
+            border-top-color: #3498db;
+        }
+
+
+        .patients-card .card-number {
+
+            color: #3498db;
+        }
+
+
+        .doctors-card {
+
+            border-top-color: #27ae60;
+        }
+
+
+        .doctors-card .card-number {
+
+            color: #27ae60;
+        }
+
+
+        .appointments-card {
+
+            border-top-color: #f39c12;
+        }
+
+
+        .appointments-card .card-number {
+
+            color: #f39c12;
+        }
+
+
+        .pharmacy-card {
+
+            border-top-color: #e74c3c;
+        }
+
+
+        .pharmacy-card .card-number {
+
+            color: #e74c3c;
+        }
+
+
+        .laboratory-card {
+
+            border-top-color: #8e44ad;
+        }
+
+
+        .laboratory-card .card-number {
+
+            color: #8e44ad;
+        }
+
+
+        .billing-card {
+             border-top-color: #16a085;
+        }
+
+        .billing-card .card-number {
+              color: #16a085;
+        }
+
+        /* ================= RECENT APPOINTMENTS ================= */
+
+.recent-appointments {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.06);
+
+    margin-bottom: 35px;
+}
+
+
+.recent-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.recent-header h2 {
+
+    color: #302b63;
+
+    font-size: 21px;
+
+    margin-bottom: 5px;
+}
+
+
+.recent-header p {
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+.recent-header a {
+
+    text-decoration: none;
+
+    background: #8e44ad;
+
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.recent-header a:hover {
+
+    background: #732d91;
+}
+
+
+.appointment-table-wrapper {
+
+    overflow-x: auto;
+}
+
+
+.appointment-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+.appointment-table th {
+
+    background: #f7f5ff;
+
+    color: #302b63;
+
+    padding: 13px;
+
+    text-align: left;
+
+    font-size: 13px;
+}
+
+
+.appointment-table td {
+
+    padding: 13px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+
+.appointment-table tr:hover {
+
+    background: #faf8ff;
+}
+
+
+.status-badge {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.status-scheduled {
+
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+
+.status-completed {
+
+    background: #d4edda;
+
+    color: #155724;
+}
+
+
+.status-cancelled {
+
+    background: #f8d7da;
+
+    color: #721c24;
+}
+
+
+.no-appointments {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777;
+
+    background: #f7f5ff;
+
+    border-radius: 10px;
+}
+
+
+        /* ================= QUICK ACTIONS ================= */
+
+        .section-title {
+
+            color: #302b63;
+
+            font-size: 22px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .quick-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .action {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            color: #333;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.06);
+
+            transition: 0.3s;
+
+            text-align: center;
+        }
+
+
+        .action:hover {
+
+            transform: translateY(-4px);
+
+            background: #faf8ff;
+        }
+
+
+        .action-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .action h3 {
+
+            color: #302b63;
+
+            font-size: 16px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .action p {
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= SYSTEM INFO ================= */
+
+        .system-info {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.06);
+        }
+
+
+        .system-info h2 {
+
+            color: #302b63;
+
+            margin-bottom: 18px;
+
+            font-size: 21px;
+        }
+
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .info-box {
+
+            background: #f7f5ff;
+
+            padding: 18px;
+
+            border-radius: 10px;
+        }
+
+
+        .info-box h3 {
+
+            color: #8e44ad;
+
+            font-size: 15px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .info-box p {
+
+            color: #666;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+
+            .cards {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .quick-actions {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                padding: 15px 20px;
+            }
+
+
+            .dashboard {
+
+                width: 95%;
+            }
+
+
+            .cards {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .quick-actions {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .welcome-section h1 {
+
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+
+        <h2>
+            🏥 Hospital Management System
+        </h2>
+
+
+        <div class="nav-links">
+
+            <a href="/dashboard" class="active">
+                Dashboard
+            </a>
+
+            <a href="/patients">
+                Patients
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/pharmacy">
+                Pharmacy
+            </a>
+
+            <a href="/laboratory">
+                Laboratory
+            </a>
+
+            <a href="/billing">
+                Billing
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <main class="dashboard">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome-section">
+
+            <h1>
+                Welcome to Hospital Dashboard 👋
+            </h1>
+
+            <p>
+                Manage patients, doctors, appointments,
+                pharmacy and laboratory services from one place.
+            </p>
+
+        </section>
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <section class="cards">
+
+
+            <!-- PATIENTS -->
+
+            <div class="card patients-card">
+
+                <div class="card-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Total Patients
+                </h3>
+
+                <div class="card-number">
+                    {{ patient_count }}
+                </div>
+
+                <a href="/patients">
+                    View Patients →
+                </a>
+
+            </div>
+
+
+            <!-- DOCTORS -->
+
+            <div class="card doctors-card">
+
+                <div class="card-icon">
+                    👨‍⚕️
+                </div>
+
+                <h3>
+                    Total Doctors
+                </h3>
+
+                <div class="card-number">
+                    {{ doctor_count }}
+                </div>
+
+                <a href="/doctors">
+                    View Doctors →
+                </a>
+
+            </div>
+
+
+            <!-- APPOINTMENTS -->
+
+            <div class="card appointments-card">
+
+                <div class="card-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Appointments
+                </h3>
+
+                <div class="card-number">
+                    {{ appointment_count }}
+                </div>
+
+                <a href="/appointments">
+                    View Appointments →
+                </a>
+
+            </div>
+
+
+            <!-- PHARMACY -->
+
+            <div class="card pharmacy-card">
+
+                <div class="card-icon">
+                    💊
+                </div>
+
+                <h3>
+                    Medicines
+                </h3>
+
+                <div class="card-number">
+                    {{ medicine_count }}
+                </div>
+
+                <a href="/pharmacy">
+                    View Pharmacy →
+                </a>
+
+            </div>
+
+
+            <!-- LABORATORY -->
+
+            <div class="card laboratory-card">
+
+                <div class="card-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    Laboratory Tests
+                </h3>
+
+                <div class="card-number">
+                    {{ lab_count }}
+                </div>
+
+                <a href="/laboratory">
+                    View Laboratory →
+                </a>
+
+            </div>
+
+
+            <!-- BILLING -->
+
+            <div class="card billing-card">
+
+                <div class="card-icon">
+        💰
+                </div>
+
+                <h3>
+                     Total Bills
+                </h3>
+
+                <div class="card-number">
+                     {{ bill_count }}
+                </div>
+
+                <a href="/billing">
+                     View Billing →
+                </a>
+
+            </div>
+
+
+        </section>
+
+        <!-- ================= RECENT APPOINTMENTS ================= -->
+
+        <section class="recent-appointments">
+
+            <div class="recent-header">
+
+                <div>
+                <h2>📅 Recent Appointments</h2>
+                <p>Latest patient appointments</p>
+                </div>
+
+                <a href="/appointments">
+                     View All →
+                </a>
+
+            </div>
+
+
+            {% if recent_appointments %}
+
+            <div class="appointment-table-wrapper">
+
+            <table class="appointment-table">
+
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                {% for appointment in recent_appointments %}
+
+                <tr>
+
+                    <td>
+                        👤 {{ appointment.patient_name }}
+                    </td>
+
+                    <td>
+                        👨‍⚕️ {{ appointment.doctor_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_time }}
+                    </td>
+
+                    <td>
+
+                        <span class="status-badge
+                            {% if appointment.status == 'Completed' %}
+                                status-completed
+                            {% elif appointment.status == 'Cancelled' %}
+                                status-cancelled
+                            {% else %}
+                                status-scheduled
+                            {% endif %}
+                        ">
+
+                            {{ appointment.status }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="no-appointments">
+        📅 No appointments available.
+    </div>
+
+    {% endif %}
+
+    </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <h2 class="section-title">
+            Quick Actions
+        </h2>
+
+
+        <section class="quick-actions">
+
+
+            <a href="/add-patient" class="action">
+
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Add Patient
+                </h3>
+
+                <p>
+                    Register a new patient
+                </p>
+
+            </a>
+
+
+            <a href="/add-doctor" class="action">
+
+                <div class="action-icon">
+                    👨‍⚕️
+                </div>
+
+                <h3>
+                    Add Doctor
+                </h3>
+
+                <p>
+                    Add doctor information
+                </p>
+
+            </a>
+
+
+            <a href="/add-appointment" class="action">
+
+                <div class="action-icon">
+                    📅
+                </div>
+
+                <h3>
+                    New Appointment
+                </h3>
+
+                <p>
+                    Schedule an appointment
+                </p>
+
+            </a>
+
+
+            <a href="/add-lab-test" class="action">
+
+                <div class="action-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    Add Lab Test
+                </h3>
+
+                <p>
+                    Create a laboratory test
+                </p>
+
+            </a>
+
+
+            <a href="/add-bill" class="action">
+
+            <div class="action-icon">
+        💰
+            </div>
+
+            <h3>
+               Add Bill
+            </h3>
+
+            <p>
+                Create a new patient bill
+            </p>
+
+            </a>
+
+
+        </section>
+
+
+        <!-- ================= SYSTEM INFORMATION ================= -->
+
+        <section class="system-info">
+
+
+            <h2>
+                System Modules
+            </h2>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-box">
+
+                    <h3>
+                        👥 Patient Management
+                    </h3>
+
+                    <p>
+                        Add, view, edit and manage
+                        patient information.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>
+                        👨‍⚕️ Doctor Management
+                    </h3>
+
+                    <p>
+                        Manage doctor details,
+                        departments and contact information.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>
+                        📅 Appointment Management
+                    </h3>
+
+                    <p>
+                        Schedule and manage
+                        patient appointments.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>
+                        💊 Pharmacy Management
+                    </h3>
+
+                    <p>
+                        Manage medicines,
+                        stock and medicine details.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>
+                        🧪 Laboratory Management
+                    </h3>
+
+                    <p>
+                        Manage laboratory tests,
+                        results and test status.
+                    </p>
+
+                </div>
+
+                <div class="info-box">
+
+                    <h3>
+                        💰 Billing Management
+                    </h3>
+
+                    <p>
+                         Create, update and manage
+                         patient bills and payment details.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>
+                        🔐 Secure Login
+                    </h3>
+
+                    <p>
+                        User authentication and
+                        session-based access control.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>
