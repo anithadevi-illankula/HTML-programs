@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Home - Employee Management System</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +15,10 @@
         body {
             font-family: Arial, sans-serif;
             color: #302b63;
+            background-color: #f4f7fc;
         }
 
         /* Hero Section */
-
         .hero {
             min-height: 430px;
             display: flex;
@@ -52,7 +50,6 @@
         }
 
         /* Buttons */
-
         .btn {
             display: inline-block;
             padding: 12px 25px;
@@ -87,7 +84,6 @@
         }
 
         /* About Section */
-
         .about {
             text-align: center;
             padding: 50px 20px 30px;
@@ -107,10 +103,45 @@
             line-height: 1.6;
         }
 
+        /* Dark theme */
+         
+        body.dark {
+            background-color: #222;
+            color: white;
+        }
+
+        body.dark .hero h1 {
+            color: white;
+        }
+
+        body.dark .hero h1 span {
+            color: #c084d6;
+        }
+
+        body.dark .hero p {
+            color: white;
+        }
+
+        body.dark .about h2 {
+            color: white;
+        }
+
+        body.dark .about p {
+            color: white;
+        }
+
+        body.dark .view-btn {
+            color: white;
+            border-color: white;
+        }
+
+        body.dark .add-btn {
+            color: #c084d6;
+            border-color: #c084d6;
+        }
+
         /* Responsive */
-
         @media (max-width: 600px) {
-
             .hero h1 {
                 font-size: 32px;
             }
@@ -118,16 +149,13 @@
             .hero p {
                 font-size: 16px;
             }
-
         }
-
+    
     </style>
 </head>
 
 <body>
-
     <!-- Hero Section -->
-
     <section class="hero">
 
         <div class="hero-content">
@@ -135,40 +163,44 @@
             <h1>
                 Welcome to <span>Employee Management System</span>
             </h1>
-
             <p>
                 A simple and efficient platform to manage employee
                 information, view employee records and keep everything
                 organized in one place.
             </p>
-
             <a href="/employees" class="btn view-btn">
                 View Employees
             </a>
-
             <a href="/addemployee" class="btn add-btn">
                 Add Employee
             </a>
-
         </div>
-
     </section>
-
-
     <!-- About Section -->
-
     <section class="about">
-
         <h2>Manage Your Employees Easily</h2>
-
         <p>
             Our Employee Management System helps you store and manage
             employee details such as name, email, department and phone
             number. You can easily add new employees and view existing
             employee information.
         </p>
-
     </section>
 
+     <!--Theme-->
+
+    <script>
+        
+         let cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            let parts = cookie.trim().split("=");
+            if (parts[0] == "theme" && parts[1] == "dark") {
+                document.body.classList.add("dark");
+            }
+        }
+
+    </script>
+
 </body>
+
 </html>
