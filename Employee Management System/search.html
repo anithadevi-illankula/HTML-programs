@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Search Employee</title>
-
     <style>
         * {
             margin: 0;
@@ -105,44 +104,72 @@
             margin-top: 25px;
             font-size: 18px;
         }
+
+        /* dark theme */
+
+        body.dark {
+           background-color: #222;
+           color: white;
+        }
+
+        body.dark h1 {
+           color: white;
+        }
+
+        body.dark .search-box {
+            background-color: #333;
+        }
+
+        body.dark label {
+           color: white;
+        }
+
+        body.dark input,
+        body.dark select {
+           background-color: #444;
+           color: white;
+           border-color: #666;
+        }
+
+        body.dark input::placeholder {
+           color: #ccc;
+        }
+
+        body.dark table {
+            border-color: #333;
+        }
+
+        body.dark td {
+            color: white;
+            border-color: #555;
+        }
+
+        body.dark tr:hover {
+            background-color: #444;
+        }
+
+        body.dark .no-result {
+           color: #ccc;
+        }
+
     </style>
 </head>
 
 <body>
-
     <h1>Search Employee</h1>
-
     <div class="search-box">
-
         <form action="/search" method="post">
-
             <label>Employee Name:</label>
-
-            <input
-                type="text"
-                name="search_name"
-                placeholder="Enter employee name"
-                value="{{ search_name }}"
-                required
-            >
-
+            <input type="text" name="search_name" placeholder="Enter employee name" value="{{ search_name }}" required>
             <button type="submit">
                 Search
             </button>
-
         </form>
-
     </div>
-
-
     <!-- Search Result -->
-
     {% if employees %}
-
     <div class="result">
-
         <table>
-
             <tr>
                 <th>ID</th>
                 <th>Full Name</th>
@@ -150,9 +177,7 @@
                 <th>Department</th>
                 <th>Phone</th>
             </tr>
-
             {% for employee in employees %}
-
             <tr>
                 <td>{{ employee[0] }}</td>
                 <td>{{ employee[1] }}</td>
@@ -160,20 +185,26 @@
                 <td>{{ employee[3] }}</td>
                 <td>{{ employee[4] }}</td>
             </tr>
-
             {% endfor %}
-
         </table>
-
     </div>
-
     {% elif search_name %}
-
     <p class="no-result">
         No employee found with the name "{{ search_name }}"
     </p>
-
     {% endif %}
 
+    <script>
+        
+         let cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            let parts = cookie.trim().split("=");
+            if (parts[0] == "theme" && parts[1] == "dark") {
+                document.body.classList.add("dark");
+            }
+        }
+
+    </script>
 </body>
+
 </html>
